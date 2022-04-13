@@ -2,12 +2,14 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ReactGlobe, { GlobeMethods } from "react-globe.gl";
 import { Country } from "../lib/country";
 import { findCentre } from "../util/centre";
-import { answerCountry } from "../util/answer";
 import { globeImg, turnGlobe } from "../util/globe";
 import { ThemeContext } from "../context/ThemeContext";
 import { getColour } from "../util/colour";
 import { isMobile } from "react-device-detect";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 const territoryData: Country[] = require("../data/territories.json").features;
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   guesses: Country[];
@@ -17,6 +19,8 @@ type Props = {
 export default function Globe({ guesses, globeRef }: Props) {
   // State
   const [places, setPlaces] = useState(guesses);
+  const currKey = useSelector((state: RootState) => state.answer.key);
+  const answerCountry = countryData[currKey];
 
   // Theme
   const { nightMode, highContrast } = useContext(ThemeContext).theme;

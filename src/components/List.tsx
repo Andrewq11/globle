@@ -1,12 +1,14 @@
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { GlobeMethods } from "react-globe.gl";
 import { Country, LanguageName } from "../lib/country";
-import { answerName } from "../util/answer";
 import { findCentre } from "../util/centre";
 import { turnGlobe } from "../util/globe";
 import { LocaleContext } from "../i18n/LocaleContext";
 import { Locale } from "../lib/locale";
 import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   guesses: Country[];
@@ -14,11 +16,11 @@ type Props = {
   globeRef: React.MutableRefObject<GlobeMethods>;
 };
 
-function reorderGuesses(guessList: Country[]) {
+function reorderGuesses(guessList: Country[], answer: string) {
   return [...guessList].sort((a, b) => {
-    if (a.properties.NAME === answerName) {
+    if (a.properties.NAME === answer) {
       return -1;
-    } else if (b.properties.NAME === answerName) {
+    } else if (b.properties.NAME === answer) {
       return 1;
     } else {
       return a.proximity - b.proximity;
@@ -27,7 +29,11 @@ function reorderGuesses(guessList: Country[]) {
 }
 
 export default function List({ guesses, win, globeRef }: Props) {
-  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses));
+  const currKey = useSelector((state: RootState) => state.answer.key);
+  const answerCountry = countryData[currKey];
+  const answerName = answerCountry.properties.NAME;
+
+  const [orderedGuesses, setOrderedGuesses] = useState(reorderGuesses(guesses, answerName));
   const { locale } = useContext(LocaleContext);
   const langNameMap: Record<Locale, LanguageName> = {
     "es-MX": "NAME_ES",
@@ -36,7 +42,7 @@ export default function List({ guesses, win, globeRef }: Props) {
   const langName = langNameMap[locale];
 
   useEffect(() => {
-    setOrderedGuesses(reorderGuesses(guesses));
+    setOrderedGuesses(reorderGuesses(guesses, answerName));
   }, [guesses]);
 
   function formatKm(m: number) {

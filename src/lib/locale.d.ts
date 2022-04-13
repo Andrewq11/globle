@@ -10,6 +10,7 @@ export type Messages = {
   Mongolia: string;
   "South Korea": string;
   help3: string;
+  help31: string;
   Aux1: string;
   Aux2: string;
   Aux3: string;

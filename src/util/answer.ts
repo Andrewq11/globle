@@ -1,21 +1,25 @@
 import { Country } from "../lib/country";
-import { today } from "./dates";
 
-const countryData: Country[] = require("../data/country_data.json").features;
+// const countryData: Country[] = require("../data/country_data.json").features;
 
-countryData.sort((a, b) => {
-  return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
-});
+// countryData.sort((a, b) => {
+//   console.log(a.properties.FLAG[1]);
+//   return a.properties.FLAG[1].localeCompare(b.properties.FLAG[1]);
+// });
 
-function generateKeyNew(list: any[], day: string) {
-  const [year, month, date] = day.split("-");
-  const dayCode = Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(date));
-  const SHUFFLE_KEY = process.env.REACT_APP_SHUFFLE_KEY || "1";
-  const key = Math.floor(dayCode / parseInt(SHUFFLE_KEY + "5")) % list.length;
-  return key;
-}
+// export function generateKeyNew() {
+//   let key;
+//   key = Math.round(Math.random() * 196);
+//   let prevAnswers: any = localStorage.getItem("answers");
+//   prevAnswers = JSON.parse(prevAnswers);
 
-const key = generateKeyNew(countryData, today);
+//   prevAnswers.push(key);
+//   localStorage.setItem("answers", JSON.stringify(prevAnswers));
 
-export const answerCountry = countryData[key];
-export const answerName = answerCountry.properties.NAME;
+//   return key;
+// }
+
+// export const key: any = generateKeyNew();
+
+//export const answerCountry = countryData[key];
+//export const answerName = answerCountry.properties.NAME;

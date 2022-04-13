@@ -1,10 +1,13 @@
 // import useCheckMobile from "../hooks/useCheckMobile";
 import { isMobile } from "react-device-detect";
-import { answerCountry, answerName } from "../util/answer";
 import { FormattedMessage } from "react-intl";
 import { useContext } from "react";
 import { LocaleContext } from "../i18n/LocaleContext";
 import { langNameMap } from "../i18n/locales";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { Country } from "../lib/country";
+const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
   win: boolean;
@@ -13,6 +16,11 @@ type Props = {
 };
 
 export function Message({ win, error, guesses }: Props) {
+  const currKey = useSelector((state: RootState) => state.answer.key);
+  const answerCountry = countryData[currKey];
+  const answerName = answerCountry.properties.NAME;
+
+  
   const { locale } = useContext(LocaleContext);
 
   let name = answerName;

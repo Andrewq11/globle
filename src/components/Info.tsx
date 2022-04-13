@@ -144,6 +144,7 @@ export default function Info({ setScreen }: Props) {
         </dd>
       ),
     },
+
   ];
 
   // Need to skip question 6 if not English because it doesn't apply.

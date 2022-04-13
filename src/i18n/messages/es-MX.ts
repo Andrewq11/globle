@@ -5,6 +5,7 @@ export const Spanish: Messages = {
   helpTitle: "Como jugar",
   help1: `Cada día habrá un País Secreto. Tu objetivo es adivinar el país secreto en el menor número de intentos posibles. Cada respuesta incorrrecta aparecerá en el globo con un color indicando que tan cerca se encuentra del País Secreto. Entre más <b>caliente</b> sea el color, más cerca estarás de la respuesta.`,
   help2: `Por ejemplo, si el País Secreto es <b>Japón</b>, entonces los siguientes países aparecerían de los siguientes colores si fueran seleccionados:`,
+  help31: "",
   France: "Francia",
   Nepal: "Nepal",
   Mongolia: "Mongolia",

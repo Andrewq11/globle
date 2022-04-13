@@ -1,14 +1,16 @@
-import { FormEvent, useContext, useState } from "react";
-import { Country, LanguageName } from "../lib/country";
-import { answerCountry, answerName } from "../util/answer";
+import { FormEvent, useContext, useReducer, useState } from "react";
+import { Country } from "../lib/country";
 import { Message } from "./Message";
 import { polygonDistance } from "../util/distance";
 import alternateNames from "../data/alternate_names.json";
 import { LocaleContext } from "../i18n/LocaleContext";
-import { Locale } from "../lib/locale";
 import localeList from "../i18n/messages";
 import { FormattedMessage } from "react-intl";
 import { langNameMap } from "../i18n/locales";
+import { useEffect } from "react";
+import { RootState } from "../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { newCountryKey } from "../redux/answerSlice";
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -22,6 +24,16 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
   const [guessName, setGuessName] = useState("");
   const [error, setError] = useState("");
   const { locale } = useContext(LocaleContext);
+  const [clearLocalStore, setClearLocalStore] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const currKey = useSelector((state: RootState) => state.answer.key);
+
+  const answerCountry = countryData[currKey];
+  const answerName = answerCountry.properties.NAME;
+
+  useEffect(() => {
+    setGuesses([]);
+  }, [clearLocalStore]);
 
   const langName = langNameMap[locale];
 
@@ -82,6 +94,24 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     }
   }
 
+  let newGameButton;
+  if (win) {
+    newGameButton = (
+      <button
+        className="bg-blue-700 dark:bg-purple-800 hover:bg-blue-900 dark:hover:bg-purple-900 disabled:bg-blue-900  text-white 
+      font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
+        type="submit"
+        onClick={() => {
+          setClearLocalStore(!clearLocalStore);
+          setWin(false);
+          dispatch(newCountryKey());
+        }}
+      >
+        <p>New Game</p>
+      </button>
+    );
+  }
+
   return (
     <div className="mt-10 mb-6 block mx-auto text-center">
       <form
@@ -111,6 +141,7 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         >
           <FormattedMessage id="Game2" />
         </button>
+        {newGameButton}
       </form>
       <Message win={win} error={error} guesses={guesses.length} />
     </div>

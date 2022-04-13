@@ -68,15 +68,6 @@ function App() {
         setReSpin={setReSpin}
         setShowStats={setShowStats}
       />
-      <Fade
-        show={showStats}
-        background="border-4 border-sky-300 dark:border-slate-700 bg-sky-100 
-        dark:bg-slate-900 drop-shadow-xl 
-      absolute z-10 top-32 w-full sm:w-fit inset-x-0 mx-auto py-6 px-6 rounded-md 
-      space-y-2"
-      >
-        <Statistics setShowStats={setShowStats} />
-      </Fade>
       {pickScreen()}
     </div>
   );

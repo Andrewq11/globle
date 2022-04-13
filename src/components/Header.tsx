@@ -38,10 +38,10 @@ export default function Header({ setScreen, setReSpin, setShowStats }: Props) {
           onClick={reRenderGlobe}
         >
           <h1
-            className="text-4xl font-extrabold"
+            className="text-3xl font-extrabold"
             style={{ fontFamily: "'Montserrat'" }}
           >
-            GLOBLE
+            GLOBLE UNLIMITED
           </h1>
         </button>
         <div className="space-x-1 flex absolute right-0 bottom-1">

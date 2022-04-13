@@ -87,6 +87,17 @@ export default function Help() {
       <p>
         <FormattedMessage id="help3" />
       </p>
+      <p>
+      <FormattedMessage id="help31" />
+        <a
+          className="underline mx-1"
+          target="_blank"
+          rel="noreferrer"
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        >
+          https://creativecommons.org/licenses/by-nc-sa/4.0/
+        </a>
+      </p>
     </div>
   );
 }
