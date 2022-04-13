@@ -1,6 +1,6 @@
 # Notes about Globle Unlimited
 
-*** Disclaimer ***
+## Disclaimer
 This project was forked from the original creator of the awesome game that is Globle, The Abe Train. Globle Unlimited was created so people can continue to play Globle even after guessing the daily mystery country. All credit for this game goes to The Abe Train and the project's other contributors. There is no intention to monetize Globle Unlimited.
 
 ## Listed countries
