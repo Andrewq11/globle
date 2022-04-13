@@ -1,6 +1,7 @@
-# Notes about Globle
+# Notes about Globle Unlimited
 
-**Version 1.4.0** - [Change log](CHANGELOG.md)
+*** Disclaimer ***
+This project was forked from the original creator of the awesome game that is Globle, The Abe Train. Globle Unlimited was created so people can continue to play Globle even after guessing the daily mystery country. All credit for this game goes to The Abe Train and the project's other contributors. There is no intention to monetize Globle Unlimited.
 
 ## Listed countries
 - The list of countries for this game is the same as that used by [Sporcle](https://www.sporcle.com/blog/2013/01/what-is-a-country/)
@@ -31,7 +32,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 2. `npm install`
 3. `npm start`
 
-# License
+# License for both Globle and Globle Unlimited
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
