@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { RootState } from "../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { newCountryKey } from "../redux/answerSlice";
+import { solveGame } from "../util/solver"; // Import the solveGame function
 const countryData: Country[] = require("../data/country_data.json").features;
 
 type Props = {
@@ -94,6 +95,15 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
     }
   }
 
+  function solveMysteryCountry() {
+    try {
+      const solvedCountry = solveGame(guessName, polygonDistance(findCountry(guessName, countryData), answerCountry));
+      setError(`The mystery country is ${solvedCountry}`);
+    } catch (error) {
+      setError(error.message);
+    }
+  }
+
   let newGameButton;
   if (win) {
     newGameButton = (
@@ -143,6 +153,14 @@ export default function Guesser({ guesses, setGuesses, win, setWin }: Props) {
         </button>
         {newGameButton}
       </form>
+      <button
+        className="bg-green-700 dark:bg-green-800 hover:bg-green-900 dark:hover:bg-green-900 disabled:bg-green-900  text-white 
+        font-bold py-1 md:py-2 px-4 rounded focus:shadow-outline "
+        type="button"
+        onClick={solveMysteryCountry}
+      >
+        Solve
+      </button>
       <Message win={win} error={error} guesses={guesses.length} />
     </div>
   );
